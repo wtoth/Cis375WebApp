@@ -5,6 +5,9 @@
 <head>
   <meta charset="utf-8">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+  <script src= "https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.2.11/jspdf.plugin.autotable.min.js"></script>
+  <script type="text/javascript"></script>
+
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
   <script type="text/javascript"></script>
 
@@ -13,16 +16,149 @@
   <meta name="author" content="Andrew Gasparovich, Dominic Santangelo, Nicholas Mallare, William Toth">
 
   <link rel="stylesheet" href="css/styles.css?v=1.0">
-
   <script type="text/javascript">
+  
+
+    function clearForm(){
+      //clear textboxes
+      document.getElementById("projectName").value="";
+      document.getElementById("nameOfRequestor").value ="";
+      document.getElementById("dateInput").value ="";
+      document.getElementById("changeRequested").value ="";
+      document.getElementById("reason").value ="";
+      document.getElementById("alternatives").value ="";
+      document.getElementById("risks").value ="";
+      document.getElementById("resources").value ="";
+      document.getElementById("quality").value ="";
+
+      //uncheck boxes
+      document.getElementById("correctiveActionBox").checked = false;
+      document.getElementById("preventativeActionBox").checked = false;
+      document.getElementById("defectRepairBox").checked = false;
+      document.getElementById("updatesBox").checked = false;
+      document.getElementById("otherBox").checked = false;
+    }
+
+    function isBoxChecked(){
+      var correctiveActionChecked, preventativeActionChecked,defectRepairChecked, updatesChecked, otherChecked = "";
+     
+
+      if(document.getElementById("corectiveActionChecked").checked){
+        correctiveActionChecked = "Corrective Action"
+      }
+      if(document.getElementById("preventativeActionChecked").checked){
+        preventativeActionChecked = "Prevantive Action";
+      }
+      if(document.getElementById("defectRepairChecked").checked){
+        defectRepairChecked = "Defect Repair";
+      }
+      if(document.getElementById("updatesChecked").checked){
+        updatesChecked = "Updates";
+      }
+      if(document.getElementById("otherChecked").checked){
+        otherChecked = "Other"
+      }
+    }
+
+    function preProcessData(){
+      var projectName = document.getElementById("projectName").value;
+      var lineSeperator = "_____________________________________________________________________________________" + '\n'; // breaks up sections
+      var header = ' '.repeat(70) + "Change Request Form" + "\n" + lineSeperator;
+
+      if(!projectName){
+        projectName = "Project Name:  " + '\n\n' + lineSeperator;
+      }
+      else {
+        projectName = "Project Name: " + projectName + '\n' + lineSeperator;
+      }
+
+      var nameOfRequestor = document.getElementById("nameOfRequestor").value;
+      if (!nameOfRequestor) {
+        nameOfRequestor = "Name of Requestor: " + '\n\n' + lineSeperator;
+      }
+      else {
+        nameOfRequestor = "Name of Requestor: " + nameOfRequestor + '\n' + lineSeperator;
+      }
+
+      var date = document.getElementById("dateInput").value;
+      if (!date) {
+        date = "Date: " + date + '\n\n' + lineSeperator;
+      }
+      else {
+        date = "Date: " + date + '\n' + lineSeperator;
+      }
+
+      var changeRequested = document.getElementById("changeRequested").value;
+      if (!changeRequested) {
+        changeRequested = "Change being requested: " + '\n' + '\n\n\n\n\n\n' + lineSeperator;
+      }
+      else {
+        changeRequested = "Change being requested: " + '\n' + changeRequested + '\n\n' + lineSeperator;
+      }
+
+      var reason = document.getElementById("reason").value;
+      if (!reason) {
+        reason = "Reason for the change: " + '\n\n\n\n\n\n' + lineSeperator;
+      }
+      else {
+        reason = "Reason for the change: " + '\n' + reason + '\n\n' + lineSeperator;
+      }
+
+      var alternatives = document.getElementById("alternatives").value;
+      if (!alternatives) {
+        alternatives = "Alternatives considered: " + '\n\n\n\n\n\n' + lineSeperator;
+      }
+      else {
+        alternatives = "Alternatives considered: " + '\n' + alternatives + '\n\n' + lineSeperator;
+      }
+
+      var risks = document.getElementById("risks").value;
+      if (!risks) {
+        risks = "Risks considered from change: " + '\n\n\n\n\n\n' + lineSeperator;
+      }
+      else {
+        risks = "Risks considered from change: " + '\n' + risks + '\n\n' + lineSeperator;
+      }
+
+      var resources = document.getElementById("resources").value;
+      if (!resources) {
+        resources = "Estimated resources and costs needed: " + '\n\n\n\n\n\n' + lineSeperator;
+      }
+      else {
+        resources = "Estimated resources and costs needed: " + '\n' + resources + '\n\n' + lineSeperator;
+      }
+
+      var quality = document.getElementById("quality").value;
+      if (!quality) {
+        quality = "Implications to quality: " + '\n\n\n\n\n\n' + lineSeperator;
+      }
+      else {
+        quality = "Implications to quality: " + '\n' + quality + '\n\n' + lineSeperator;
+      }
+      var userInput = header + projectName + nameOfRequestor + date + changeRequested + reason + alternatives + risks + resources + quality; //Concatenated inputs to be split for formatting
+      return userInput;
+    }
+
+    
+    
+
     $("#Print").live("click", function () {
-      var pdf = new jsPDF();
-      //pdf.text(30, 30, 'Hello world!');
-      source = $('#content')[0];
-      pdf.fromHTML(
-        source
-      );
-      pdf.save('ChangeReport.pdf');
+        //create pdf
+        var doc = new jsPDF('p','in','letter')
+	      doc.setFontSize(11);
+        var data = preProcessData();
+        var processedData= doc.splitTextToSize(data, 7.5);
+          
+        doc.text(0.5, 0.5, processedData);
+        
+        doc.save('Test.pdf');
+
+    });   
+    
+    // clear all text
+    $("#Clear").live("click", function () {
+      clearForm();
+      
     });   
   </script> 
 
@@ -30,12 +166,10 @@
     table, th, td {
       border: 1px solid black;
     }
-
     textarea{
       height: 100px;
       width: 600px;
     }
-
 </style>
 </head>
 
@@ -45,26 +179,27 @@
   <div style="text-align: center;" id="content">
     <div style="display: inline-block; text-align: left;">
       <form>
-        Project Name: <input type="text" name="Input1" value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        Date: <input type="text" name="Input1" value=""></br></br>
+        Project Name: <input type="text" id = "projectName" name="Input1" value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Name of Requestor: <input type="text" id = "nameOfRequestor" name = "Name">
+        Date: <input type="text" id = "dateInput" name="Input1" value=""></br></br>
         Does this change effect (Check all that apply):<br>
-        Corrective Action <input type="checkbox" name="Corrective">
-        Preventative Action <input type="checkbox" name="Preventative">
-        Defect Repair <input type="checkbox" name="Defect">
-        Updates <input type="checkbox" name="Updates">
-        Other <input type="checkbox" name="Other"><br></br>
+        Corrective Action <input type="checkbox" name="checkCorrectiveAction" id = "correctiveActionBox">
+        Preventative Action <input type="checkbox" name="Preventative" id = "preventativeActionBox">
+        Defect Repair <input type="checkbox" name="Defect" id = "defectRepairBox">
+        Updates <input type="checkbox" name="Updates" id = "updatesBox">
+        Other <input type="checkbox" id = "otherBox" name="Other"><br></br>
 
-        Describe the change being requested:<br><textarea id="ChangeRequested"></textarea><br>
+        Describe the change being requested:<br><textarea id="changeRequested"></textarea><br>
       
-        Describe the reason for the change:<br><textarea id="Reason"></textarea><br>
+        Describe the reason for the change:<br><textarea id="reason"></textarea><br>
       
-        Describe all alternatives considered:<br><textarea id="Alternatives"></textarea><br>
+        Describe all alternatives considered:<br><textarea id="alternatives"></textarea><br>
       
-        Describe risks to be considered for this change:<br><textarea id="Risks"></textarea><br>
+        Describe risks to be considered for this change:<br><textarea id="risks"></textarea><br>
       
-        Estimate resources and costs needed to implement this change:<br><textarea id="Resources"></textarea><br>
+        Estimate resources and costs needed to implement this change:<br><textarea id="resources"></textarea><br>
 
-        Describe the implications to quality:<br><textarea id="Quality"></textarea><br>
+        Describe the implications to quality:<br><textarea id="quality"></textarea><br>
       </form>
       <br>
     </div>
@@ -82,3 +217,4 @@
 <!--For checkboxes we can do <input type="checkbox"-->
 <!--For large amounts of data entry we can do <textarea></textarea>-->
 <!--pdf.fromHTML(document.body); Investigate this-->
+
