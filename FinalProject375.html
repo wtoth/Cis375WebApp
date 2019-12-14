@@ -5,6 +5,9 @@
 <head>
   <meta charset="utf-8">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+  <script src= "https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.2.11/jspdf.plugin.autotable.min.js"></script>
+  <script type="text/javascript"></script>
+
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
   <script type="text/javascript"></script>
 
@@ -13,12 +16,90 @@
   <meta name="author" content="Andrew Gasparovich, Dominic Santangelo, Nicholas Mallare, William Toth">
 
   <link rel="stylesheet" href="css/styles.css?v=1.0">
-
   <script type="text/javascript">
+    // TODO: Format pdf properly
+    function formatText(){
+      // WIDTH = width of pdf
+      // LENGTH= length of pdf
+      // after each input is added add x(height of spacing)
+        // how to account for x of a random sized input? use math to divide string.length by WIDTH?
+      // y might always start fixed at the furthest left value 0
+      var x = 0;
+      var y = 0;
+    }
+
+
+    function clearForm(){
+      //clear textboxes
+      document.getElementById("projectName").value="";
+      document.getElementById("nameOfRequestor").value ="";
+      document.getElementById("dateInput").value ="";
+      document.getElementById("changeRequested").value ="";
+      document.getElementById("reason").value ="";
+      document.getElementById("alternatives").value ="";
+      document.getElementById("risks").value ="";
+      document.getElementById("resources").value ="";
+      document.getElementById("quality").value ="";
+
+      //uncheck boxes
+      document.getElementById("correctiveActionBox").checked = false;
+      document.getElementById("preventativeActionBox").checked = false;
+      document.getElementById("defectRepairBox").checked = false;
+      document.getElementById("updatesBox").checked = false;
+      document.getElementById("otherBox").checked = false;
+    }
+
+    
+
+
+    function isBoxChecked(){
+      var correctiveActionChecked, preventativeActionChecked,defectRepairChecked, updatesChecked, otherChecked = "";
+
+      if(document.getElementById("corectiveActionChecked").checked){
+        correctiveActionChecked = "Corrective Action"
+      }
+      if(document.getElementById("preventativeActionChecked").checked){
+        preventativeActionChecked = "Prevantive Action";
+      }
+      if(document.getElementById("defectRepairChecked").checked){
+        defectRepairChecked = "Defect Repair";
+      }
+      if(document.getElementById("updatesChecked").checked){
+        updatesChecked = "Updates";
+      }
+      if(document.getElementById("otherChecked").checked){
+        otherChecked = "Other"
+      }
+    }
+
+    
+    
+
     $("#Print").live("click", function () {
-      var pdf = new jsPDF();
-      pdf.text(30, 30, 'Hello world!');
-      pdf.save('hello_world.pdf');
+        var projectName = document.getElementById("projectName").value;
+        var nameOfRequestor = document.getElementById("nameOfRequestor").value;
+        var date = document.getElementById("dateInput").value;
+        var changeRequested = document.getElementById("changeRequested").value;
+        var reason = document.getElementById("reason").value;
+        var alternatives = document.getElementById("alternatives").value;
+        var risks = document.getElementById("risks").value;
+        var resources = document.getElementById("resources").value;
+        var quality = document.getElementById("quality").value;
+
+        var pdf = new jsPDF();
+        var doc = new jsPDF('p', 'in', 'letter'),
+        sizes = [12, 16, 20],
+        fonts = [['Times', 'Roman'], ['Helvetica', ''], ['Times', 'Italic']],
+        font, size, lines,
+        margin = 0.5, // inches on a 8.5 x 11 inch sheet.
+        verticalOffset = margin,
+  
+    });   
+    
+    // clear all text
+    $("#Clear").live("click", function () {
+      clearForm();
+      
     });   
   </script> 
 
@@ -26,47 +107,54 @@
     table, th, td {
       border: 1px solid black;
     }
+    textarea{
+      height: 100px;
+      width: 600px;
+    }
 </style>
 </head>
 
 <body>
   <script src="js/scripts.js"></script>
   <h1 align="center">Change Request PDF Generator</h1>
-    
+  <div style="text-align: center;" id="content">
+    <div style="display: inline-block; text-align: left;">
+      <form>
+        Project Name: <input type="text" id = "projectName" name="Input1" value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Name of Requestor: <input type="text" id = "nameOfRequestor" name = "Name">
+        Date: <input type="text" id = "dateInput" name="Input1" value=""></br></br>
+        Does this change effect (Check all that apply):<br>
+        Corrective Action <input type="checkbox" name="checkCorrectiveAction" id = "correctiveActionBox">
+        Preventative Action <input type="checkbox" name="Preventative" id = "preventativeActionBox">
+        Defect Repair <input type="checkbox" name="Defect" id = "defectRepairBox">
+        Updates <input type="checkbox" name="Updates" id = "updatesBox">
+        Other <input type="checkbox" id = "otherBox" name="Other"><br></br>
 
-    <table align="center">
-        <tr>
-            <th>Firstname</th>
-            <th>Lastname</th> 
-            <th>Age</th>
-        </tr>
-        <tr>
-            <td><input type="text" name="Input1"></td>
-            <td>Smith</td>
-            <td>50</td>
-        </tr>
-        <tr>
-            <td>Eve</td>
-            <td>Jackson</td>
-            <td>94</td>
-        </tr>
-        <tr>
-            <td>John</td>
-            <td>Doe</td>
-            <td>80</td>
-        </tr>
-    </table>
+        Describe the change being requested:<br><textarea id="changeRequested"></textarea><br>
+      
+        Describe the reason for the change:<br><textarea id="reason"></textarea><br>
+      
+        Describe all alternatives considered:<br><textarea id="alternatives"></textarea><br>
+      
+        Describe risks to be considered for this change:<br><textarea id="risks"></textarea><br>
+      
+        Estimate resources and costs needed to implement this change:<br><textarea id="resources"></textarea><br>
 
-    <br>
-
-    <form id="form1" align="center">
-        <div id="dvContainer">
-            This content needs to be printed.
-        </div>
-    <input type="button" value="Generate" id="Print"/>
-    <p>hi</p>
-
+        Describe the implications to quality:<br><textarea id="quality"></textarea><br>
+      </form>
+      <br>
+    </div>
+  </div>
+  <div style="text-align: center;">
+    <input type="button" value="Generate" id="Print"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="button" value="Clear" id="Clear"/>
+  </div>
 </body>
 
 
 </html>
+
+<!--For validation in numbers we can use <input type="number"-->
+<!--For checkboxes we can do <input type="checkbox"-->
+<!--For large amounts of data entry we can do <textarea></textarea>-->
+<!--pdf.fromHTML(document.body); Investigate this-->
