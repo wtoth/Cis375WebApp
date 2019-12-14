@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="css/styles.css?v=1.0">
   <script type="text/javascript">
   
+  
 
     function clearForm(){
       //clear textboxes
@@ -40,33 +41,52 @@
     }
 
     function isBoxChecked(){
-      var correctiveActionChecked, preventativeActionChecked,defectRepairChecked, updatesChecked, otherChecked = "";
-     
+      var correctiveActionChecked = "";
+      var preventativeActionChecked = "";
+      var defectRepairChecked = "";
+      var updatesChecked = "";
+      var otherChecked = "";
+      var checkedBoxes = "";
 
-      if(document.getElementById("corectiveActionChecked").checked){
-        correctiveActionChecked = "Corrective Action"
+      
+
+      if(document.getElementById("correctiveActionBox").checked){
+        correctiveActionChecked = "Corrective Action, ";
       }
-      if(document.getElementById("preventativeActionChecked").checked){
-        preventativeActionChecked = "Prevantive Action";
+      if(document.getElementById("preventativeActionBox").checked){
+        preventativeActionChecked = "Preventative Action, ";
       }
-      if(document.getElementById("defectRepairChecked").checked){
-        defectRepairChecked = "Defect Repair";
+      if(document.getElementById("defectRepairBox").checked){
+        defectRepairChecked = "Defect Repair, ";
       }
-      if(document.getElementById("updatesChecked").checked){
-        updatesChecked = "Updates";
+      if(document.getElementById("updatesBox").checked){
+        updatesChecked = "Updates, ";
       }
-      if(document.getElementById("otherChecked").checked){
-        otherChecked = "Other"
+      if(document.getElementById("otherBox").checked){
+        otherChecked = "Other";
       }
+      
+      checkedBoxes = correctiveActionChecked + preventativeActionChecked + defectRepairChecked + updatesChecked + otherChecked;
+
+      if(!checkedBoxes){
+        checkedBoxes = "Change will effect (check all that apply):" + '\n' + "Corrective Action __ Preventative Action ___ Defect Repair ___ Updates ___ Other ___" + '\n';
+        console.log("blank error loop works!")
+      }
+      else{
+        checkedBoxes = "Changes will effect: " + checkedBoxes;
+      }
+     
+      console.log(checkedBoxes);
+      return checkedBoxes;
     }
 
     function preProcessData(){
-      var projectName = document.getElementById("projectName").value;
-      var lineSeperator = "_____________________________________________________________________________________" + '\n'; // breaks up sections
+      var lineSeperator = "_".repeat(96) + '\n'; // breaks up sections
       var header = ' '.repeat(70) + "Change Request Form" + "\n" + lineSeperator;
 
+      var projectName = document.getElementById("projectName").value;
       if(!projectName){
-        projectName = "Project Name:  " + '\n\n' + lineSeperator;
+        projectName = "Project Name:  " + '\n' + lineSeperator;
       }
       else {
         projectName = "Project Name: " + projectName + '\n' + lineSeperator;
@@ -74,7 +94,7 @@
 
       var nameOfRequestor = document.getElementById("nameOfRequestor").value;
       if (!nameOfRequestor) {
-        nameOfRequestor = "Name of Requestor: " + '\n\n' + lineSeperator;
+        nameOfRequestor = "Name of Requestor: " + '\n' + lineSeperator;
       }
       else {
         nameOfRequestor = "Name of Requestor: " + nameOfRequestor + '\n' + lineSeperator;
@@ -82,11 +102,14 @@
 
       var date = document.getElementById("dateInput").value;
       if (!date) {
-        date = "Date: " + date + '\n\n' + lineSeperator;
+        date = "Date: " + date + '\n' + lineSeperator;
       }
       else {
         date = "Date: " + date + '\n' + lineSeperator;
       }
+
+      var boxesChecked = isBoxChecked();
+      boxesChecked = boxesChecked + lineSeperator;
 
       var changeRequested = document.getElementById("changeRequested").value;
       if (!changeRequested) {
@@ -135,7 +158,7 @@
       else {
         quality = "Implications to quality: " + '\n' + quality + '\n\n';
       }
-      var userInput = header + projectName + nameOfRequestor + date + changeRequested + reason + alternatives + risks + resources + quality; //Concatenated inputs to be split for formatting
+      var userInput = header + projectName + nameOfRequestor + date + boxesChecked + changeRequested + reason + alternatives + risks + resources + quality; //Concatenated inputs to be split for formatting
       return userInput;
     }
 
@@ -145,7 +168,7 @@
     $("#Print").live("click", function () {
         //create pdf
         var doc = new jsPDF('p','in','letter')
-	      doc.setFontSize(11);
+	      doc.setFontSize(10);
         var data = preProcessData();
         var processedData= doc.splitTextToSize(data, 7.5);
           
@@ -179,9 +202,9 @@
   <div style="text-align: center;" id="content">
     <div style="display: inline-block; text-align: left;">
       <form>
-        Project Name: <input type="text" id = "projectName" name="Input1" value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        Name of Requestor: <input type="text" id = "nameOfRequestor" name = "Name">
-        Date: <input type="text" id = "dateInput" name="Input1" value=""></br></br>
+        Project Name: <input type="text" id = "projectName" name="Input1" maxlength="35">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Name of Requestor: <input type="text" id = "nameOfRequestor" name = "Name" maxlength="35">
+        Date: <input type="text" id = "dateInput" name="Input1" maxLength = "20" value=""></br></br>
         Does this change effect (Check all that apply):<br>
         Corrective Action <input type="checkbox" name="checkCorrectiveAction" id = "correctiveActionBox">
         Preventative Action <input type="checkbox" name="Preventative" id = "preventativeActionBox">
@@ -189,17 +212,17 @@
         Updates <input type="checkbox" name="Updates" id = "updatesBox">
         Other <input type="checkbox" id = "otherBox" name="Other"><br></br>
 
-        Describe the change being requested:<br><textarea id="changeRequested"></textarea><br>
+        Describe the change being requested:<br><textarea id="changeRequested" maxlength="580"></textarea><br>
       
-        Describe the reason for the change:<br><textarea id="reason"></textarea><br>
+        Describe the reason for the change:<br><textarea id="reason" maxlength="580"></textarea><br>
       
-        Describe all alternatives considered:<br><textarea id="alternatives"></textarea><br>
+        Describe all alternatives considered:<br><textarea id="alternatives" maxlength="580"></textarea><br>
       
-        Describe risks to be considered for this change:<br><textarea id="risks"></textarea><br>
+        Describe risks to be considered for this change:<br><textarea id="risks" maxlength="580"></textarea><br>
       
-        Estimate resources and costs needed to implement this change:<br><textarea id="resources"></textarea><br>
+        Estimate resources and costs needed to implement this change:<br><textarea id="resources" maxlength="580"></textarea><br>
 
-        Describe the implications to quality:<br><textarea id="quality"></textarea><br>
+        Describe the implications to quality:<br><textarea id="quality" maxlength="580"></textarea><br>
       </form>
       <br>
     </div>
