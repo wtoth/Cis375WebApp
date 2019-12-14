@@ -17,8 +17,12 @@
   <script type="text/javascript">
     $("#Print").live("click", function () {
       var pdf = new jsPDF();
-      pdf.text(30, 30, 'Hello world!');
-      pdf.save('hello_world.pdf');
+      //pdf.text(30, 30, 'Hello world!');
+      source = $('#content')[0];
+      pdf.fromHTML(
+        source
+      );
+      pdf.save('ChangeReport.pdf');
     });   
   </script> 
 
@@ -38,10 +42,10 @@
 <body>
   <script src="js/scripts.js"></script>
   <h1 align="center">Change Request PDF Generator</h1>
-  <div style="text-align: center;">
+  <div style="text-align: center;" id="content">
     <div style="display: inline-block; text-align: left;">
       <form>
-        Project Name <input type="text" name="Input1" value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Project Name: <input type="text" name="Input1" value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         Date: <input type="text" name="Input1" value=""></br></br>
         Does this change effect (Check all that apply):<br>
         Corrective Action <input type="checkbox" name="Corrective">
@@ -50,17 +54,17 @@
         Updates <input type="checkbox" name="Updates">
         Other <input type="checkbox" name="Other"><br></br>
 
-        Describe the change being requested:<br><textarea></textarea><br>
+        Describe the change being requested:<br><textarea id="ChangeRequested"></textarea><br>
       
-        Describe the reason for the change:<br><textarea></textarea><br>
+        Describe the reason for the change:<br><textarea id="Reason"></textarea><br>
       
-        Describe all alternatives considered:<br><textarea></textarea><br>
+        Describe all alternatives considered:<br><textarea id="Alternatives"></textarea><br>
       
-        Describe risks to be considered for this change:<br><textarea></textarea><br>
+        Describe risks to be considered for this change:<br><textarea id="Risks"></textarea><br>
       
-        Estimate resources and costs needed to implement this change:<br><textarea></textarea><br>
+        Estimate resources and costs needed to implement this change:<br><textarea id="Resources"></textarea><br>
 
-        Describe the implications to quality:<br><textarea></textarea><br>
+        Describe the implications to quality:<br><textarea id="Quality"></textarea><br>
       </form>
       <br>
     </div>
