@@ -26,47 +26,54 @@
     table, th, td {
       border: 1px solid black;
     }
+
+    textarea{
+      height: 100px;
+      width: 600px;
+    }
+
 </style>
 </head>
 
 <body>
   <script src="js/scripts.js"></script>
   <h1 align="center">Change Request PDF Generator</h1>
-    
+  <div style="text-align: center;">
+    <div style="display: inline-block; text-align: left;">
+      <form>
+        Project Name <input type="text" name="Input1" value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Date: <input type="text" name="Input1" value=""></br></br>
+        Does this change effect (Check all that apply):<br>
+        Corrective Action <input type="checkbox" name="Corrective">
+        Preventative Action <input type="checkbox" name="Preventative">
+        Defect Repair <input type="checkbox" name="Defect">
+        Updates <input type="checkbox" name="Updates">
+        Other <input type="checkbox" name="Other"><br></br>
 
-    <table align="center">
-        <tr>
-            <th>Firstname</th>
-            <th>Lastname</th> 
-            <th>Age</th>
-        </tr>
-        <tr>
-            <td><input type="text" name="Input1"></td>
-            <td>Smith</td>
-            <td>50</td>
-        </tr>
-        <tr>
-            <td>Eve</td>
-            <td>Jackson</td>
-            <td>94</td>
-        </tr>
-        <tr>
-            <td>John</td>
-            <td>Doe</td>
-            <td>80</td>
-        </tr>
-    </table>
+        Describe the change being requested:<br><textarea></textarea><br>
+      
+        Describe the reason for the change:<br><textarea></textarea><br>
+      
+        Describe all alternatives considered:<br><textarea></textarea><br>
+      
+        Describe risks to be considered for this change:<br><textarea></textarea><br>
+      
+        Estimate resources and costs needed to implement this change:<br><textarea></textarea><br>
 
-    <br>
-
-    <form id="form1" align="center">
-        <div id="dvContainer">
-            This content needs to be printed.
-        </div>
+        Describe the implications to quality:<br><textarea></textarea><br>
+      </form>
+      <br>
+    </div>
+  </div>
+  <div style="text-align: center;">
     <input type="button" value="Generate" id="Print"/>
-    <p>hi</p>
-
+  </div>
 </body>
 
 
 </html>
+
+<!--For validation in numbers we can use <input type="number"-->
+<!--For checkboxes we can do <input type="checkbox"-->
+<!--For large amounts of data entry we can do <textarea></textarea>-->
+<!--pdf.fromHTML(document.body); Investigate this-->
