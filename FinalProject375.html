@@ -215,6 +215,7 @@
   text-align: center;
   position: relative;
   display: inline-block;
+  color:rgb(224, 1, 1);
 }
 
 /* Tooltip text */
@@ -232,7 +233,7 @@
   z-index: 1;
   bottom: 125%;
   left: 0%;
-  margin-left: -60px;
+  margin-left: -90px;
 
   /* Fade in tooltip */
   opacity: 0;
@@ -268,24 +269,58 @@
         Project Name: <input type="text" id = "projectName" name="Input1" maxlength="35">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         Name of Requestor: <input type="text" id = "nameOfRequestor" name = "Name" maxlength="35"><br><br>
         Date: <input type="text" id = "dateInput" name="Input1" maxLength = "20" value=""></br></br>
-        Does this change effect (Check all that apply):<br>
+        Does this change effect (Check all that apply):
+        <div class="tooltip"><img src="./qCircle.svg" style="width:15px;height:15px;">
+          <span class="tooltiptext">Please select any and all categories that your change request may fall into</span>
+        </div>
+        <br>
         Corrective Action <input type="checkbox" name="checkCorrectiveAction" id = "correctiveActionBox">
         Preventative Action <input type="checkbox" name="Preventative" id = "preventativeActionBox">
         Defect Repair <input type="checkbox" name="Defect" id = "defectRepairBox">
         Updates <input type="checkbox" name="Updates" id = "updatesBox">
         Other <input type="checkbox" id = "otherBox" name="Other"><br></br>
 
-        Describe the change being requested:<br><textarea id="changeRequested" maxlength="580"></textarea><br>
+        Describe the change being requested:
+        <div class="tooltip"><img src="./qCircle.svg" style="width:15px;height:15px;">
+          <span class="tooltiptext">Please enter what you wish to change and how you wish to change it</span>
+        </div>
+        <br>
+        <textarea id="changeRequested" maxlength="580"></textarea><br>
       
-        Describe the reason for the change:<br><textarea id="reason" maxlength="580"></textarea><br>
+        Describe the reason for the change:
+        <div class="tooltip"><img src="./qCircle.svg" style="width:15px;height:15px;">
+          <span class="tooltiptext">In this area please enter why you wish to make this change</span>
+        </div>
+        <br>
+        <textarea id="reason" maxlength="580"></textarea><br>
       
-        Describe all alternatives considered:<br><textarea id="alternatives" maxlength="580"></textarea><br>
+        Describe all alternatives considered:
+        <div class="tooltip"><img src="./qCircle.svg" style="width:15px;height:15px;">
+          <span class="tooltiptext">Please enter any other solutions that you have considered for this problem</span>
+        </div>
+        <br>
+        <textarea id="alternatives" maxlength="580"></textarea><br>
       
-        Describe risks to be considered for this change:<br><textarea id="risks" maxlength="580"></textarea><br>
+        Describe risks to be considered for this change:
+        <div class="tooltip"><img src="./qCircle.svg" style="width:15px;height:15px;">
+          <span class="tooltiptext">Please enter any and all risks that you believe to be associated with this change</span>
+        </div>
+        <br>
+        <textarea id="risks" maxlength="580"></textarea><br>
       
-        Estimate resources and costs needed to implement this change:<br><textarea id="resources" maxlength="580"></textarea><br>
+        Estimate resources and costs needed to implement this change:
+        <div class="tooltip"><img src="./qCircle.svg" style="width:15px;height:15px;">
+          <span class="tooltiptext">Please enter how much you think this change will cost</span>
+        </div>
+        <br>
+        <textarea id="resources" maxlength="580"></textarea><br>
 
-        Describe the implications to quality:<br><textarea id="quality" maxlength="580"></textarea><br>
+        Describe the implications to quality:
+        <div class="tooltip"><img src="./qCircle.svg" style="width:15px;height:15px;">
+          <span class="tooltiptext">Please enter how much you believe this change will effect the quality of your product</span>
+        </div>
+        <br>
+        <textarea id="quality" maxlength="580"></textarea><br>
       </form>
       <br>
     </div>
@@ -294,12 +329,11 @@
     <input type="button" value="Generate" id="Print"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <input type="button" value="Clear" id="Clear"/>
   <br><br>
-  <div class="tooltip">Need Help?
-    <span class="tooltiptext">Welcome to the Change Request PDF Generator.<br>Just simply fill out our form to create your change request or just click generate to print out a blank form that you can write in by hand.<br>If you want to start over simply click the Clear button!</span>
+  <div class="tooltip"><img src="./qCircle.svg" style="width:15;height:15px;">
+    <span class="tooltiptext">Welcome to the Change Request PDF Generator.<br>Just simply fill out our form to create your change request or just click generate to print out a blank form that you can write in by hand.<br>If you want to start over simply click the Clear button!<br>For more specific help please hover over any of the other help icons!</span>
   </div><br><br>
 </div>
 </body>
-
 
 </html>
 
