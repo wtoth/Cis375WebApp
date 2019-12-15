@@ -98,8 +98,8 @@
     }
 
     function preProcessData(){
-      var lineSeperator = "_".repeat(96) + '\n'; // breaks up sections
-      var header = ' '.repeat(70) + "Change Request Form" + "\n" + lineSeperator;
+      var lineSeperator = "_".repeat(108) + '\n'; // breaks up sections
+      var header = ' '.repeat(90) + "Change Request Form" + "\n" + lineSeperator;
 
       var projectName = document.getElementById("projectName").value;
       if(!projectName){
@@ -185,7 +185,7 @@
     $("#Print").live("click", function () {
         //create pdf
         var doc = new jsPDF('p','in','letter')
-	      doc.setFontSize(10);
+	      doc.setFontSize(9);
         var data = preProcessData();
         var processedData= doc.splitTextToSize(data, 7.5);
           
@@ -313,14 +313,14 @@
           <span class="tooltiptext">Please enter how much you think this change will cost</span>
         </div>
         <br>
-        <textarea id="resources" maxlength="580"></textarea><br>
+        <textarea id="resources" maxlength="450"></textarea><br>
 
         Describe the implications to quality:
         <div class="tooltip"><img src="./qCircle.svg" style="width:15px;height:15px;">
           <span class="tooltiptext">Please enter how much you believe this change will effect the quality of your product</span>
         </div>
         <br>
-        <textarea id="quality" maxlength="580"></textarea><br>
+        <textarea id="quality" maxlength="450"></textarea><br>
       </form>
       <br>
     </div>
