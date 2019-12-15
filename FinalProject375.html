@@ -50,20 +50,37 @@
 
       
 
-      if(document.getElementById("correctiveActionBox").checked){
+      if(document.getElementById("correctiveActionBox").checked && !document.getElementById("preventativeActionBox").checked && !document.getElementById("defectRepairBox").checked && !document.getElementById("updatesBox").checked && !document.getElementById("otherBox").checked){
+        correctiveActionChecked = "Corrective Action ";
+      }
+      else if(document.getElementById("correctiveActionBox").checked){
         correctiveActionChecked = "Corrective Action, ";
       }
-      if(document.getElementById("preventativeActionBox").checked){
+
+      if(document.getElementById("preventativeActionBox").checked && !document.getElementById("defectRepairBox").checked && !document.getElementById("updatesBox").checked && !document.getElementById("otherBox").checked){
+        preventativeActionChecked = "Preventative Action ";
+      }
+      else if(document.getElementById("preventativeActionBox").checked){
         preventativeActionChecked = "Preventative Action, ";
       }
-      if(document.getElementById("defectRepairBox").checked){
+
+      if(document.getElementById("defectRepairBox").checked && !document.getElementById("updatesBox").checked && !document.getElementById("otherBox").checked){
+        defectRepairChecked = "Defect Repair ";
+      }
+      else if(document.getElementById("defectRepairBox").checked){
         defectRepairChecked = "Defect Repair, ";
       }
-      if(document.getElementById("updatesBox").checked){
+
+      if(document.getElementById("updatesBox").checked && !document.getElementById("otherBox").checked){
+        updatesChecked = "Updates ";
+      }
+      else if(document.getElementById("updatesBox").checked){
         updatesChecked = "Updates, ";
       }
+
+
       if(document.getElementById("otherBox").checked){
-        otherChecked = "Other";
+        otherChecked = "Other ";
       }
       
       checkedBoxes = correctiveActionChecked + preventativeActionChecked + defectRepairChecked + updatesChecked + otherChecked;
@@ -203,7 +220,7 @@
     <div style="display: inline-block; text-align: left;">
       <form>
         Project Name: <input type="text" id = "projectName" name="Input1" maxlength="35">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        Name of Requestor: <input type="text" id = "nameOfRequestor" name = "Name" maxlength="35">
+        Name of Requestor: <input type="text" id = "nameOfRequestor" name = "Name" maxlength="35"><br><br>
         Date: <input type="text" id = "dateInput" name="Input1" maxLength = "20" value=""></br></br>
         Does this change effect (Check all that apply):<br>
         Corrective Action <input type="checkbox" name="checkCorrectiveAction" id = "correctiveActionBox">
