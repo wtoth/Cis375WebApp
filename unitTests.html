@@ -19,7 +19,6 @@
   <script type="text/javascript">
   
   
-
     function clearForm(){
       //clear textboxes
       document.getElementById("projectName").value="";
@@ -178,7 +177,23 @@
       var userInput = header + projectName + nameOfRequestor + date + boxesChecked + changeRequested + reason + alternatives + risks + resources + quality; //Concatenated inputs to be split for formatting
       return userInput;
     }
-
+    //this is so that the same block of code doesnt have to keep reappearing in tests
+    function setVariables(d1, d2, d3, d4, d5, d6, d7, d8, d9, d10, d11, d12 ,d13, d14) {
+      document.getElementById("projectName").value = d1;
+      document.getElementById("nameOfRequestor").value = d2;
+      document.getElementById("dateInput").value = d3;
+      document.getElementById("changeRequested").value = d4;
+      document.getElementById("reason").value = d5;
+      document.getElementById("alternatives").value = d6;
+      document.getElementById("risks").value = d7;
+      document.getElementById("resources").value = d8;
+      document.getElementById("quality").value = d9;
+      document.getElementById("correctiveActionBox").checked = d10;
+      document.getElementById("preventativeActionBox").checked = d11;
+      document.getElementById("defectRepairBox").checked = d12;
+      document.getElementById("updatesBox").checked = d13;
+      document.getElementById("otherBox").checked = d14;
+    }
   </script> 
 
 
@@ -223,20 +238,7 @@
     //unit tests for the clear component
     QUnit.module("clearButton", function( assert ) {
       QUnit.test("All fields and checkboxes cleared", function( assert ) {
-        document.getElementById("projectName").value="";
-        document.getElementById("nameOfRequestor").value="";
-        document.getElementById("dateInput").value="";
-        document.getElementById("changeRequested").value="";
-        document.getElementById("reason").value="";
-        document.getElementById("alternatives").value="";
-        document.getElementById("risks").value="";
-        document.getElementById("resources").value="";
-        document.getElementById("quality").value="";
-        document.getElementById("correctiveActionBox").checked = false;
-        document.getElementById("preventativeActionBox").checked = false;
-        document.getElementById("defectRepairBox").checked = false;
-        document.getElementById("updatesBox").checked = false;
-        document.getElementById("otherBox").checked = false;
+        setVariables( "", "", "", "", "", "", "", "", "",false, false, false, false, false)
         clearForm();
         assert.equal(document.getElementById("projectName").value,"");
         assert.equal(document.getElementById("nameOfRequestor").value,"");
@@ -254,20 +256,7 @@
         assert.equal(document.getElementById("otherBox").checked,false);
       });
       QUnit.test("All fields and checkboxes filled", function( assert ) {
-        document.getElementById("projectName").value="Heartbeat monitor";
-        document.getElementById("nameOfRequestor").value="Dominic";
-        document.getElementById("dateInput").value="6/20/2056";
-        document.getElementById("changeRequested").value="Use dataflow architecture instead of object-oriented architecture";
-        document.getElementById("reason").value="I believe dataflow architecture fits our project more closely";
-        document.getElementById("alternatives").value="I don't have the motivation to think of alternatives";
-        document.getElementById("risks").value="It may be less fitting for our project therefore pushing our progress back";
-        document.getElementById("resources").value="Going to need to borrow a software engineer with knowledge in architectures";
-        document.getElementById("quality").value="very good yes indeed";
-        document.getElementById("correctiveActionBox").checked = true;
-        document.getElementById("preventativeActionBox").checked = true;
-        document.getElementById("defectRepairBox").checked = true;
-        document.getElementById("updatesBox").checked = true;
-        document.getElementById("otherBox").checked = true;
+        setVariables("Heartbeat monitor", "Dominic", "6/20/2056", "Use dataflow architecture instead of object-oriented architecture", "I believe dataflow architecture fits our project more closely", "I don't have the motivation to think of alternatives", "It may be less fitting for our project therefore pushing our progress back", "Going to need to borrow a software engineer with knowledge in architectures", "very good yes indeed", true, true, true, true, true)
         clearForm();
         assert.equal(document.getElementById("projectName").value,"");
         assert.equal(document.getElementById("nameOfRequestor").value,"");
@@ -285,20 +274,7 @@
         assert.equal(document.getElementById("otherBox").checked,false);
       });
       QUnit.test("Only fields filled", function( assert ) {
-        document.getElementById("projectName").value="Heartbeat monitor";
-        document.getElementById("nameOfRequestor").value="Dominic";
-        document.getElementById("dateInput").value="6/20/2056";
-        document.getElementById("changeRequested").value="Use dataflow architecture instead of object-oriented architecture";
-        document.getElementById("reason").value="I believe dataflow architecture fits our project more closely";
-        document.getElementById("alternatives").value="I don't have the motivation to think of alternatives";
-        document.getElementById("risks").value="It may be less fitting for our project therefore pushing our progress back";
-        document.getElementById("resources").value="Going to need to borrow a software engineer with knowledge in architectures";
-        document.getElementById("quality").value="very good yes indeed";
-        document.getElementById("correctiveActionBox").checked = false;
-        document.getElementById("preventativeActionBox").checked = false;
-        document.getElementById("defectRepairBox").checked = false;
-        document.getElementById("updatesBox").checked = false;
-        document.getElementById("otherBox").checked = false;
+        setVariables("Heartbeat monitor", "Dominic", "6/20/2056", "Use dataflow architecture instead of object-oriented architecture", "I believe dataflow architecture fits our project more closely", "I don't have the motivation to think of alternatives", "It may be less fitting for our project therefore pushing our progress back", "Going to need to borrow a software engineer with knowledge in architectures", "very good yes indeed", false, false, false, false, false)
         clearForm();
         assert.equal(document.getElementById("projectName").value,"");
         assert.equal(document.getElementById("nameOfRequestor").value,"");
@@ -316,20 +292,349 @@
         assert.equal(document.getElementById("otherBox").checked,false);
       });
       QUnit.test("Only checkboxes checked", function( assert ) {
-        document.getElementById("projectName").value="";
-        document.getElementById("nameOfRequestor").value="";
-        document.getElementById("dateInput").value="";
-        document.getElementById("changeRequested").value="";
-        document.getElementById("reason").value="";
-        document.getElementById("alternatives").value="";
-        document.getElementById("risks").value="";
-        document.getElementById("resources").value="";
-        document.getElementById("quality").value="";
-        document.getElementById("correctiveActionBox").checked = true;
-        document.getElementById("preventativeActionBox").checked = true;
-        document.getElementById("defectRepairBox").checked = true;
-        document.getElementById("updatesBox").checked = true;
-        document.getElementById("otherBox").checked = true;
+        setVariables( "", "", "", "", "", "", "", "", "",true, true, true, true, true)
+        clearForm();
+        assert.equal(document.getElementById("projectName").value,"");
+        assert.equal(document.getElementById("nameOfRequestor").value,"");
+        assert.equal(document.getElementById("dateInput").value,"");
+        assert.equal(document.getElementById("changeRequested").value,"");
+        assert.equal(document.getElementById("reason").value,"");
+        assert.equal(document.getElementById("alternatives").value,"");
+        assert.equal(document.getElementById("risks").value,"");
+        assert.equal(document.getElementById("resources").value,"");
+        assert.equal(document.getElementById("quality").value,"");
+        assert.equal(document.getElementById("correctiveActionBox").checked,false);
+        assert.equal(document.getElementById("preventativeActionBox").checked,false);
+        assert.equal(document.getElementById("defectRepairBox").checked,false);
+        assert.equal(document.getElementById("updatesBox").checked,false);
+        assert.equal(document.getElementById("otherBox").checked,false);
+      });
+      QUnit.test("Only projectName filled", function( assert ) {
+        setVariables( "Heartbeat monitor", "", "", "", "", "", "", "", "",false, false, false, false, false)
+        clearForm();
+        assert.equal(document.getElementById("projectName").value,"");
+        assert.equal(document.getElementById("nameOfRequestor").value,"");
+        assert.equal(document.getElementById("dateInput").value,"");
+        assert.equal(document.getElementById("changeRequested").value,"");
+        assert.equal(document.getElementById("reason").value,"");
+        assert.equal(document.getElementById("alternatives").value,"");
+        assert.equal(document.getElementById("risks").value,"");
+        assert.equal(document.getElementById("resources").value,"");
+        assert.equal(document.getElementById("quality").value,"");
+        assert.equal(document.getElementById("correctiveActionBox").checked,false);
+        assert.equal(document.getElementById("preventativeActionBox").checked,false);
+        assert.equal(document.getElementById("defectRepairBox").checked,false);
+        assert.equal(document.getElementById("updatesBox").checked,false);
+        assert.equal(document.getElementById("otherBox").checked,false);
+      });
+      QUnit.test("Only name of requestor filled", function( assert ) {
+        setVariables( "", "Dominic", "", "", "", "", "", "", "",false, false, false, false, false)
+        clearForm();
+        assert.equal(document.getElementById("projectName").value,"");
+        assert.equal(document.getElementById("nameOfRequestor").value,"");
+        assert.equal(document.getElementById("dateInput").value,"");
+        assert.equal(document.getElementById("changeRequested").value,"");
+        assert.equal(document.getElementById("reason").value,"");
+        assert.equal(document.getElementById("alternatives").value,"");
+        assert.equal(document.getElementById("risks").value,"");
+        assert.equal(document.getElementById("resources").value,"");
+        assert.equal(document.getElementById("quality").value,"");
+        assert.equal(document.getElementById("correctiveActionBox").checked,false);
+        assert.equal(document.getElementById("preventativeActionBox").checked,false);
+        assert.equal(document.getElementById("defectRepairBox").checked,false);
+        assert.equal(document.getElementById("updatesBox").checked,false);
+        assert.equal(document.getElementById("otherBox").checked,false);
+      });
+      QUnit.test("Only date filled", function( assert ) {
+        setVariables( "", "", "6/20/2056", "", "", "", "", "", "", false, false, false, false, false)
+        clearForm();
+        assert.equal(document.getElementById("projectName").value,"");
+        assert.equal(document.getElementById("nameOfRequestor").value,"");
+        assert.equal(document.getElementById("dateInput").value,"");
+        assert.equal(document.getElementById("changeRequested").value,"");
+        assert.equal(document.getElementById("reason").value,"");
+        assert.equal(document.getElementById("alternatives").value,"");
+        assert.equal(document.getElementById("risks").value,"");
+        assert.equal(document.getElementById("resources").value,"");
+        assert.equal(document.getElementById("quality").value,"");
+        assert.equal(document.getElementById("correctiveActionBox").checked,false);
+        assert.equal(document.getElementById("preventativeActionBox").checked,false);
+        assert.equal(document.getElementById("defectRepairBox").checked,false);
+        assert.equal(document.getElementById("updatesBox").checked,false);
+        assert.equal(document.getElementById("otherBox").checked,false);
+      });
+      QUnit.test("Only change requested filled", function( assert ) {
+        setVariables( "", "", "", "Use dataflow architecture instead of object-oriented architecture", "", "", "", "", "",false, false, false, false, false)
+        clearForm();
+        assert.equal(document.getElementById("projectName").value,"");
+        assert.equal(document.getElementById("nameOfRequestor").value,"");
+        assert.equal(document.getElementById("dateInput").value,"");
+        assert.equal(document.getElementById("changeRequested").value,"");
+        assert.equal(document.getElementById("reason").value,"");
+        assert.equal(document.getElementById("alternatives").value,"");
+        assert.equal(document.getElementById("risks").value,"");
+        assert.equal(document.getElementById("resources").value,"");
+        assert.equal(document.getElementById("quality").value,"");
+        assert.equal(document.getElementById("correctiveActionBox").checked,false);
+        assert.equal(document.getElementById("preventativeActionBox").checked,false);
+        assert.equal(document.getElementById("defectRepairBox").checked,false);
+        assert.equal(document.getElementById("updatesBox").checked,false);
+        assert.equal(document.getElementById("otherBox").checked,false);
+      });
+      QUnit.test("Only reason filled", function( assert ) {
+        setVariables( "", "", "", "", "I believe dataflow architecture fits our project more closely", "", "", "", "",false, false, false, false, false)
+        clearForm();
+        assert.equal(document.getElementById("projectName").value,"");
+        assert.equal(document.getElementById("nameOfRequestor").value,"");
+        assert.equal(document.getElementById("dateInput").value,"");
+        assert.equal(document.getElementById("changeRequested").value,"");
+        assert.equal(document.getElementById("reason").value,"");
+        assert.equal(document.getElementById("alternatives").value,"");
+        assert.equal(document.getElementById("risks").value,"");
+        assert.equal(document.getElementById("resources").value,"");
+        assert.equal(document.getElementById("quality").value,"");
+        assert.equal(document.getElementById("correctiveActionBox").checked,false);
+        assert.equal(document.getElementById("preventativeActionBox").checked,false);
+        assert.equal(document.getElementById("defectRepairBox").checked,false);
+        assert.equal(document.getElementById("updatesBox").checked,false);
+        assert.equal(document.getElementById("otherBox").checked,false);
+      });
+      QUnit.test("Only alternatives filled", function( assert ) {
+        setVariables( "", "", "", "", "", "I don't have the motivation to think of alternatives", "", "", "",false, false, false, false, false)
+        clearForm();
+        assert.equal(document.getElementById("projectName").value,"");
+        assert.equal(document.getElementById("nameOfRequestor").value,"");
+        assert.equal(document.getElementById("dateInput").value,"");
+        assert.equal(document.getElementById("changeRequested").value,"");
+        assert.equal(document.getElementById("reason").value,"");
+        assert.equal(document.getElementById("alternatives").value,"");
+        assert.equal(document.getElementById("risks").value,"");
+        assert.equal(document.getElementById("resources").value,"");
+        assert.equal(document.getElementById("quality").value,"");
+        assert.equal(document.getElementById("correctiveActionBox").checked,false);
+        assert.equal(document.getElementById("preventativeActionBox").checked,false);
+        assert.equal(document.getElementById("defectRepairBox").checked,false);
+        assert.equal(document.getElementById("updatesBox").checked,false);
+        assert.equal(document.getElementById("otherBox").checked,false);
+      });
+      QUnit.test("Only risks filled", function( assert ) {
+        setVariables( "", "", "", "", "", "", "It may be less fitting for our project therefore pushing our progress back", "", "",false, false, false, false, false)
+        clearForm();
+        assert.equal(document.getElementById("projectName").value,"");
+        assert.equal(document.getElementById("nameOfRequestor").value,"");
+        assert.equal(document.getElementById("dateInput").value,"");
+        assert.equal(document.getElementById("changeRequested").value,"");
+        assert.equal(document.getElementById("reason").value,"");
+        assert.equal(document.getElementById("alternatives").value,"");
+        assert.equal(document.getElementById("risks").value,"");
+        assert.equal(document.getElementById("resources").value,"");
+        assert.equal(document.getElementById("quality").value,"");
+        assert.equal(document.getElementById("correctiveActionBox").checked,false);
+        assert.equal(document.getElementById("preventativeActionBox").checked,false);
+        assert.equal(document.getElementById("defectRepairBox").checked,false);
+        assert.equal(document.getElementById("updatesBox").checked,false);
+        assert.equal(document.getElementById("otherBox").checked,false);
+      });
+      QUnit.test("Only resources filled", function( assert ) {
+        setVariables( "", "", "", "", "", "", "", "Gonna need to borrow a software engineer with knowledge in architectures", "",false, false, false, false, false)
+        clearForm();
+        assert.equal(document.getElementById("projectName").value,"");
+        assert.equal(document.getElementById("nameOfRequestor").value,"");
+        assert.equal(document.getElementById("dateInput").value,"");
+        assert.equal(document.getElementById("changeRequested").value,"");
+        assert.equal(document.getElementById("reason").value,"");
+        assert.equal(document.getElementById("alternatives").value,"");
+        assert.equal(document.getElementById("risks").value,"");
+        assert.equal(document.getElementById("resources").value,"");
+        assert.equal(document.getElementById("quality").value,"");
+        assert.equal(document.getElementById("correctiveActionBox").checked,false);
+        assert.equal(document.getElementById("preventativeActionBox").checked,false);
+        assert.equal(document.getElementById("defectRepairBox").checked,false);
+        assert.equal(document.getElementById("updatesBox").checked,false);
+        assert.equal(document.getElementById("otherBox").checked,false);
+      });
+      QUnit.test("Only quality filled", function( assert ) {
+        setVariables( "", "", "", "", "", "", "", "", "very good yes indeed",false, false, false, false, false)
+        clearForm();
+        assert.equal(document.getElementById("projectName").value,"");
+        assert.equal(document.getElementById("nameOfRequestor").value,"");
+        assert.equal(document.getElementById("dateInput").value,"");
+        assert.equal(document.getElementById("changeRequested").value,"");
+        assert.equal(document.getElementById("reason").value,"");
+        assert.equal(document.getElementById("alternatives").value,"");
+        assert.equal(document.getElementById("risks").value,"");
+        assert.equal(document.getElementById("resources").value,"");
+        assert.equal(document.getElementById("quality").value,"");
+        assert.equal(document.getElementById("correctiveActionBox").checked,false);
+        assert.equal(document.getElementById("preventativeActionBox").checked,false);
+        assert.equal(document.getElementById("defectRepairBox").checked,false);
+        assert.equal(document.getElementById("updatesBox").checked,false);
+        assert.equal(document.getElementById("otherBox").checked,false);
+      });
+      QUnit.test("Only correctiveAction and other checked", function( assert ) {
+        setVariables( "", "", "", "", "", "", "", "", "",true, false, false, false, true)
+        clearForm();
+        assert.equal(document.getElementById("projectName").value,"");
+        assert.equal(document.getElementById("nameOfRequestor").value,"");
+        assert.equal(document.getElementById("dateInput").value,"");
+        assert.equal(document.getElementById("changeRequested").value,"");
+        assert.equal(document.getElementById("reason").value,"");
+        assert.equal(document.getElementById("alternatives").value,"");
+        assert.equal(document.getElementById("risks").value,"");
+        assert.equal(document.getElementById("resources").value,"");
+        assert.equal(document.getElementById("quality").value,"");
+        assert.equal(document.getElementById("correctiveActionBox").checked,false);
+        assert.equal(document.getElementById("preventativeActionBox").checked,false);
+        assert.equal(document.getElementById("defectRepairBox").checked,false);
+        assert.equal(document.getElementById("updatesBox").checked,false);
+        assert.equal(document.getElementById("otherBox").checked,false);
+      });
+      QUnit.test("Only correctiveAction checked", function( assert ) {
+        setVariables( "", "", "", "", "", "", "", "", "",true, false, false, false, false)
+        clearForm();
+        assert.equal(document.getElementById("projectName").value,"");
+        assert.equal(document.getElementById("nameOfRequestor").value,"");
+        assert.equal(document.getElementById("dateInput").value,"");
+        assert.equal(document.getElementById("changeRequested").value,"");
+        assert.equal(document.getElementById("reason").value,"");
+        assert.equal(document.getElementById("alternatives").value,"");
+        assert.equal(document.getElementById("risks").value,"");
+        assert.equal(document.getElementById("resources").value,"");
+        assert.equal(document.getElementById("quality").value,"");
+        assert.equal(document.getElementById("correctiveActionBox").checked,false);
+        assert.equal(document.getElementById("preventativeActionBox").checked,false);
+        assert.equal(document.getElementById("defectRepairBox").checked,false);
+        assert.equal(document.getElementById("updatesBox").checked,false);
+        assert.equal(document.getElementById("otherBox").checked,false);
+      });
+      QUnit.test("Only preventativeAction and other checked", function( assert ) {
+        setVariables( "", "", "", "", "", "", "", "", "",false, true, false, false, true)
+        clearForm();
+        assert.equal(document.getElementById("projectName").value,"");
+        assert.equal(document.getElementById("nameOfRequestor").value,"");
+        assert.equal(document.getElementById("dateInput").value,"");
+        assert.equal(document.getElementById("changeRequested").value,"");
+        assert.equal(document.getElementById("reason").value,"");
+        assert.equal(document.getElementById("alternatives").value,"");
+        assert.equal(document.getElementById("risks").value,"");
+        assert.equal(document.getElementById("resources").value,"");
+        assert.equal(document.getElementById("quality").value,"");
+        assert.equal(document.getElementById("correctiveActionBox").checked,false);
+        assert.equal(document.getElementById("preventativeActionBox").checked,false);
+        assert.equal(document.getElementById("defectRepairBox").checked,false);
+        assert.equal(document.getElementById("updatesBox").checked,false);
+        assert.equal(document.getElementById("otherBox").checked,false);
+      });
+      QUnit.test("Only preventativeAction checked", function( assert ) {
+        setVariables( "", "", "", "", "", "", "", "", "",false, true, false, false, false)
+        clearForm();
+        assert.equal(document.getElementById("projectName").value,"");
+        assert.equal(document.getElementById("nameOfRequestor").value,"");
+        assert.equal(document.getElementById("dateInput").value,"");
+        assert.equal(document.getElementById("changeRequested").value,"");
+        assert.equal(document.getElementById("reason").value,"");
+        assert.equal(document.getElementById("alternatives").value,"");
+        assert.equal(document.getElementById("risks").value,"");
+        assert.equal(document.getElementById("resources").value,"");
+        assert.equal(document.getElementById("quality").value,"");
+        assert.equal(document.getElementById("correctiveActionBox").checked,false);
+        assert.equal(document.getElementById("preventativeActionBox").checked,false);
+        assert.equal(document.getElementById("defectRepairBox").checked,false);
+        assert.equal(document.getElementById("updatesBox").checked,false);
+        assert.equal(document.getElementById("otherBox").checked,false);
+      });
+      QUnit.test("Only defectRepair and other checked", function( assert ) {
+        setVariables( "", "", "", "", "", "", "", "", "",false, false, true, false, true)
+        clearForm();
+        assert.equal(document.getElementById("projectName").value,"");
+        assert.equal(document.getElementById("nameOfRequestor").value,"");
+        assert.equal(document.getElementById("dateInput").value,"");
+        assert.equal(document.getElementById("changeRequested").value,"");
+        assert.equal(document.getElementById("reason").value,"");
+        assert.equal(document.getElementById("alternatives").value,"");
+        assert.equal(document.getElementById("risks").value,"");
+        assert.equal(document.getElementById("resources").value,"");
+        assert.equal(document.getElementById("quality").value,"");
+        assert.equal(document.getElementById("correctiveActionBox").checked,false);
+        assert.equal(document.getElementById("preventativeActionBox").checked,false);
+        assert.equal(document.getElementById("defectRepairBox").checked,false);
+        assert.equal(document.getElementById("updatesBox").checked,false);
+        assert.equal(document.getElementById("otherBox").checked,false);
+      });
+      QUnit.test("Only defectRepair checked", function( assert ) {
+        setVariables( "", "", "", "", "", "", "", "", "",false, false, true, false, false)
+        clearForm();
+        assert.equal(document.getElementById("projectName").value,"");
+        assert.equal(document.getElementById("nameOfRequestor").value,"");
+        assert.equal(document.getElementById("dateInput").value,"");
+        assert.equal(document.getElementById("changeRequested").value,"");
+        assert.equal(document.getElementById("reason").value,"");
+        assert.equal(document.getElementById("alternatives").value,"");
+        assert.equal(document.getElementById("risks").value,"");
+        assert.equal(document.getElementById("resources").value,"");
+        assert.equal(document.getElementById("quality").value,"");
+        assert.equal(document.getElementById("correctiveActionBox").checked,false);
+        assert.equal(document.getElementById("preventativeActionBox").checked,false);
+        assert.equal(document.getElementById("defectRepairBox").checked,false);
+        assert.equal(document.getElementById("updatesBox").checked,false);
+        assert.equal(document.getElementById("otherBox").checked,false);
+      });
+      QUnit.test("Only defectRepair checked", function( assert ) {
+        setVariables( "", "", "", "", "", "", "", "", "",false, false, true, false, false)
+        clearForm();
+        assert.equal(document.getElementById("projectName").value,"");
+        assert.equal(document.getElementById("nameOfRequestor").value,"");
+        assert.equal(document.getElementById("dateInput").value,"");
+        assert.equal(document.getElementById("changeRequested").value,"");
+        assert.equal(document.getElementById("reason").value,"");
+        assert.equal(document.getElementById("alternatives").value,"");
+        assert.equal(document.getElementById("risks").value,"");
+        assert.equal(document.getElementById("resources").value,"");
+        assert.equal(document.getElementById("quality").value,"");
+        assert.equal(document.getElementById("correctiveActionBox").checked,false);
+        assert.equal(document.getElementById("preventativeActionBox").checked,false);
+        assert.equal(document.getElementById("defectRepairBox").checked,false);
+        assert.equal(document.getElementById("updatesBox").checked,false);
+        assert.equal(document.getElementById("otherBox").checked,false);
+      });
+      QUnit.test("Only updates and other checked", function( assert ) {
+        setVariables( "", "", "", "", "", "", "", "", "",false, false, false, true, true)
+        clearForm();
+        assert.equal(document.getElementById("projectName").value,"");
+        assert.equal(document.getElementById("nameOfRequestor").value,"");
+        assert.equal(document.getElementById("dateInput").value,"");
+        assert.equal(document.getElementById("changeRequested").value,"");
+        assert.equal(document.getElementById("reason").value,"");
+        assert.equal(document.getElementById("alternatives").value,"");
+        assert.equal(document.getElementById("risks").value,"");
+        assert.equal(document.getElementById("resources").value,"");
+        assert.equal(document.getElementById("quality").value,"");
+        assert.equal(document.getElementById("correctiveActionBox").checked,false);
+        assert.equal(document.getElementById("preventativeActionBox").checked,false);
+        assert.equal(document.getElementById("defectRepairBox").checked,false);
+        assert.equal(document.getElementById("updatesBox").checked,false);
+        assert.equal(document.getElementById("otherBox").checked,false);
+      });
+      QUnit.test("Only updates checked", function( assert ) {
+        setVariables( "", "", "", "", "", "", "", "", "",false, false, false, true, false)
+        clearForm();
+        assert.equal(document.getElementById("projectName").value,"");
+        assert.equal(document.getElementById("nameOfRequestor").value,"");
+        assert.equal(document.getElementById("dateInput").value,"");
+        assert.equal(document.getElementById("changeRequested").value,"");
+        assert.equal(document.getElementById("reason").value,"");
+        assert.equal(document.getElementById("alternatives").value,"");
+        assert.equal(document.getElementById("risks").value,"");
+        assert.equal(document.getElementById("resources").value,"");
+        assert.equal(document.getElementById("quality").value,"");
+        assert.equal(document.getElementById("correctiveActionBox").checked,false);
+        assert.equal(document.getElementById("preventativeActionBox").checked,false);
+        assert.equal(document.getElementById("defectRepairBox").checked,false);
+        assert.equal(document.getElementById("updatesBox").checked,false);
+        assert.equal(document.getElementById("otherBox").checked,false);
+      });
+      QUnit.test("Only other checked", function( assert ) {
+        setVariables( "", "", "", "", "", "", "", "", "",false, false, false, false, true)
         clearForm();
         assert.equal(document.getElementById("projectName").value,"");
         assert.equal(document.getElementById("nameOfRequestor").value,"");
@@ -352,58 +657,19 @@
       var lineSeperator = "_".repeat(108) + '\n'; // breaks up sections
       var header = ' '.repeat(90) + "Change Request Form" + "\n" + lineSeperator;
       QUnit.test("Some fields and checkboxes filled", function( assert ) {
-        document.getElementById("projectName").value="Heartbeat monitor";
-        document.getElementById("nameOfRequestor").value="";
-        document.getElementById("dateInput").value="6/20/2056";
-        document.getElementById("changeRequested").value="";
-        document.getElementById("reason").value="I believe dataflow architecture fits our project more closely";
-        document.getElementById("alternatives").value="";
-        document.getElementById("risks").value="It may be less fitting for our project therefore pushing our progress back";
-        document.getElementById("resources").value="Going to need to borrow a software engineer with knowledge in architectures";
-        document.getElementById("quality").value="very good yes indeed";
-        document.getElementById("correctiveActionBox").checked = false;
-        document.getElementById("preventativeActionBox").checked = false;
-        document.getElementById("defectRepairBox").checked = false;
-        document.getElementById("updatesBox").checked = true;
-        document.getElementById("otherBox").checked = true;
+        setVariables("Heartbeat monitor", "", "6/20/2056", "", "I believe dataflow architecture fits our project more closely", "", "It may be less fitting for our project therefore pushing our progress back", "Going to need to borrow a software engineer with knowledge in architectures", "very good yes indeed", false, false, false, true, true)
         userInput = preProcessData();
         //lots of junk to the right, basically just the hard data of the input
         assert.equal(userInput, header + "Project Name: Heartbeat monitor\n" + lineSeperator + "Name of Requestor: \n" + lineSeperator + "Date: 6/20/2056\n" + lineSeperator + "Changes will effect: Updates, Other  \n" + lineSeperator + "Change being requested: \n\n\n\n\n\n\n" + lineSeperator + "Reason for the change: \nI believe dataflow architecture fits our project more closely\n\n" + lineSeperator + "Alternatives considered: \n\n\n\n\n\n" + lineSeperator + "Risks considered from change: \nIt may be less fitting for our project therefore pushing our progress back\n\n" + lineSeperator +"Estimated resources and costs needed: \nGoing to need to borrow a software engineer with knowledge in architectures\n\n" + lineSeperator + "Implications to quality: \nvery good yes indeed\n\n")
       });
       QUnit.test("All fields filled, all checkboxes unchecked", function( assert ) {
-        document.getElementById("projectName").value="Heartbeat monitor";
-        document.getElementById("nameOfRequestor").value="Dominic";
-        document.getElementById("dateInput").value="6/20/2056";
-        document.getElementById("changeRequested").value="Use dataflow architecture instead of object-oriented architecture";
-        document.getElementById("reason").value="I believe dataflow architecture fits our project more closely";
-        document.getElementById("alternatives").value="I don't have the motivation to think of alternatives";
-        document.getElementById("risks").value="It may be less fitting for our project therefore pushing our progress back";
-        document.getElementById("resources").value="Going to need to borrow a software engineer with knowledge in architectures";
-        document.getElementById("quality").value="very good yes indeed";
-        document.getElementById("correctiveActionBox").checked = false;
-        document.getElementById("preventativeActionBox").checked = false;
-        document.getElementById("defectRepairBox").checked = false;
-        document.getElementById("updatesBox").checked = false;
-        document.getElementById("otherBox").checked = false;
-        userInput = preProcessData();
+        setVariables("Heartbeat monitor", "Dominic", "6/20/2056", "Use dataflow architecture instead of object-oriented architecture", "I believe dataflow architecture fits our project more closely", "I don't have the motivation to think of alternatives", "It may be less fitting for our project therefore pushing our progress back", "Going to need to borrow a software engineer with knowledge in architectures", "very good yes indeed", false, false, false, false, false)
+       userInput = preProcessData();
         //lots of junk to the right, basically just the hard data of the input
         assert.equal(userInput, header + "Project Name: Heartbeat monitor\n" + lineSeperator + "Name of Requestor: Dominic\n" + lineSeperator + "Date: 6/20/2056\n" + lineSeperator + "Change will effect (check all that apply):\nCorrective Action __ Preventative Action ___ Defect Repair ___ Updates ___ Other ___\n \n" + lineSeperator + "Change being requested: \nUse dataflow architecture instead of object-oriented architecture\n\n" + lineSeperator + "Reason for the change: \nI believe dataflow architecture fits our project more closely\n\n" + lineSeperator + "Alternatives considered: \nI don't have the motivation to think of alternatives\n\n" + lineSeperator + "Risks considered from change: \nIt may be less fitting for our project therefore pushing our progress back\n\n" + lineSeperator +"Estimated resources and costs needed: \nGoing to need to borrow a software engineer with knowledge in architectures\n\n" + lineSeperator + "Implications to quality: \nvery good yes indeed\n\n")
       });
       QUnit.test("All fields empty, all checkboxes checked", function( assert ) {
-        document.getElementById("projectName").value="";
-        document.getElementById("nameOfRequestor").value="";
-        document.getElementById("dateInput").value="";
-        document.getElementById("changeRequested").value="";
-        document.getElementById("reason").value="";
-        document.getElementById("alternatives").value="";
-        document.getElementById("risks").value="";
-        document.getElementById("resources").value="";
-        document.getElementById("quality").value="";
-        document.getElementById("correctiveActionBox").checked = true;
-        document.getElementById("preventativeActionBox").checked = true;
-        document.getElementById("defectRepairBox").checked = true;
-        document.getElementById("updatesBox").checked = true;
-        document.getElementById("otherBox").checked = true;
+        setVariables( "", "", "", "", "", "", "", "", "", true, true, true, true, true)
         userInput = preProcessData();
         //lots of junk to the right, basically just the hard data of the input
         assert.equal(userInput, header + "Project Name:  \n" + lineSeperator + "Name of Requestor: \n" + lineSeperator + "Date: \n" + lineSeperator + "Changes will effect: Corrective Action, Preventative Action, Defect Repair, Updates, Other  \n" + lineSeperator + "Change being requested: \n\n\n\n\n\n\n" + lineSeperator + "Reason for the change: \n\n\n\n\n\n" + lineSeperator + "Alternatives considered: \n\n\n\n\n\n" + lineSeperator + "Risks considered from change: \n\n\n\n\n\n" + lineSeperator +"Estimated resources and costs needed: \n\n\n\n\n\n" + lineSeperator + "Implications to quality: \n\n\n\n\n\n")
@@ -414,8 +680,4 @@
 </body>
 </html>
 
-<!--For validation in numbers we can use <input type="number"-->
-<!--For checkboxes we can do <input type="checkbox"-->
-<!--For large amounts of data entry we can do <textarea></textarea>-->
-<!--pdf.fromHTML(document.body); Investigate this-->
 
