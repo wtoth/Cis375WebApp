@@ -178,11 +178,6 @@
       var userInput = header + projectName + nameOfRequestor + date + boxesChecked + changeRequested + reason + alternatives + risks + resources + quality; //Concatenated inputs to be split for formatting
       return userInput;
     }
-
-    function clearDate() {
-      document.getElementById("Input1").value = "";
-    }
-    
     
 
     $("#Print").live("click", function () {
@@ -397,3 +392,4 @@
 <!--For checkboxes we can do <input type="checkbox"-->
 <!--For large amounts of data entry we can do <textarea></textarea>-->
 <!--pdf.fromHTML(document.body); Investigate this-->
+
