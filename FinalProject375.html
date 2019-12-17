@@ -179,6 +179,9 @@
       return userInput;
     }
 
+    function clearDate() {
+      document.getElementById("Input1").value = "";
+    }
     
     
 
@@ -203,14 +206,68 @@
   </script> 
 
 <style>
-    table, th, td {
-      border: 1px solid black;
+  table, th, td {
+    border: 1px solid black;
+  }
+  
+  textarea {
+    height: 100px;
+    width: 600px;
+    background-color: black;
+    border-style: inset;
+    color: rgb(199, 199, 199);
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    border: 2px inset #1C6EA4;
+    border-radius: 3px;
+  }
+
+  body {
+    color: white;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: small;
+    background: #000000;
+    background: -moz-linear-gradient(top, #000000 0%, #124668 50%, #000000 100%);
+    background: -webkit-linear-gradient(top, #000000 0%, #124668 50%, #000000 100%);
+    background: linear-gradient(to bottom, #000000 0%, #124668 50%, #000000 100%);
+  }
+
+  h1 {
+    color: white;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+  }
+
+  .btn {
+    color: white;
+    background: transparent;
+    border: 2px solid #0099CC;
+    border-radius: 6px; 
+    border: none;      
+    color: white;    
+    padding: 16px 32px;      
+    text-align: center;      
+    display: inline-block;      
+    font-size: 16px;      
+    margin: 4px 2px;      
+    -webkit-transition-duration: 0.4s; /* Safari */      
+    transition-duration: 0.4s;      
+    cursor: pointer;      
+    text-decoration: none;      
+    text-transform: uppercase;        
+    color: white;      
+    border: 2px solid #008CBA;
+  }
+
+  .btn:hover {
+      background-color: #008CBA;
     }
-    textarea{
-      height: 100px;
-      width: 600px;
-    }
-   /* Tooltip container */
+
+  input.inputField {
+    background-color: black;
+    border-style: inset;
+    color: white;
+  }
+
+/* Tooltip container */
 .tooltip {
   text-align: center;
   position: relative;
@@ -260,16 +317,16 @@
 </style>
 </head>
 
-<body>
+<body></body>
   <script src="js/scripts.js"></script>
   <h1 align="center">Change Request PDF Generator</h1>
   <div style="text-align: center;" id="content">
-    <div style="display: inline-block; text-align: left;">
+    <div style="display: inline-block; border: 3px outset #124668; border-radius: 5px; text-align: left; background-color: black; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px;">
       <form>
-        Project Name: <input type="text" id = "projectName" name="Input1" maxlength="35">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        Name of Requestor: <input type="text" id = "nameOfRequestor" name = "Name" maxlength="35"><br><br>
-        Date: <input type="text" id = "dateInput" name="Input1" maxLength = "20" value=""></br></br>
-        Does this change effect (Check all that apply):
+        Project Name: <input type="text" class="inputField" id = "projectName" name="Input1" maxlength="35" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Name of Requestor: <input type="text" class="inputField" id = "nameOfRequestor" name = "Name" maxlength="35"><br><br>
+        Date: <input type="text" class="inputField" placeholder="MM/DD/YYYY" id = "dateInput" name="Input1" maxLength = "20"></br></br>
+        Does this change affect (Check all that apply):
         <div class="tooltip"><img src="./qCircle.svg" style="width:15px;height:15px;">
           <span class="tooltiptext">Please select any and all categories that your change request may fall into</span>
         </div>
@@ -285,49 +342,48 @@
           <span class="tooltiptext">Please enter what you wish to change and how you wish to change it</span>
         </div>
         <br>
-        <textarea id="changeRequested" maxlength="580"></textarea><br>
+        <textarea id="changeRequested" maxlength="580"></textarea><br><br>
       
         Describe the reason for the change:
         <div class="tooltip"><img src="./qCircle.svg" style="width:15px;height:15px;">
           <span class="tooltiptext">In this area please enter why you wish to make this change</span>
         </div>
         <br>
-        <textarea id="reason" maxlength="580"></textarea><br>
+        <textarea id="reason" maxlength="580"></textarea><br><br>
       
         Describe all alternatives considered:
         <div class="tooltip"><img src="./qCircle.svg" style="width:15px;height:15px;">
           <span class="tooltiptext">Please enter any other solutions that you have considered for this problem</span>
         </div>
         <br>
-        <textarea id="alternatives" maxlength="580"></textarea><br>
+        <textarea id="alternatives" maxlength="580"></textarea><br><br>
       
         Describe risks to be considered for this change:
         <div class="tooltip"><img src="./qCircle.svg" style="width:15px;height:15px;">
           <span class="tooltiptext">Please enter any and all risks that you believe to be associated with this change</span>
         </div>
         <br>
-        <textarea id="risks" maxlength="580"></textarea><br>
+        <textarea id="risks" maxlength="580"></textarea><br><br>
       
         Estimate resources and costs needed to implement this change:
         <div class="tooltip"><img src="./qCircle.svg" style="width:15px;height:15px;">
           <span class="tooltiptext">Please enter how much you think this change will cost</span>
         </div>
         <br>
-        <textarea id="resources" maxlength="450"></textarea><br>
+        <textarea id="resources" maxlength="450"></textarea><br><br>
 
         Describe the implications to quality:
         <div class="tooltip"><img src="./qCircle.svg" style="width:15px;height:15px;">
           <span class="tooltiptext">Please enter how much you believe this change will effect the quality of your product</span>
         </div>
         <br>
-        <textarea id="quality" maxlength="450"></textarea><br>
+        <textarea id="quality" maxlength="450"></textarea><br><br>
       </form>
-      <br>
     </div>
-  </div>
+  </div><br><br>
   <div style="text-align: center;">
-    <input type="button" value="Generate" id="Print"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <input type="button" value="Clear" id="Clear"/>
+    <input type="button" class="btn" value="Generate" id="Print"/><br><br><br>
+    <input type="button" class="btn" value="Clear" id="Clear"/>
   <br><br>
   <div class="tooltip"><img src="./qCircle.svg" style="width:15;height:15px;">
     <span class="tooltiptext">Welcome to the Change Request PDF Generator.<br>Just simply fill out our form to create your change request or just click generate to print out a blank form that you can write in by hand.<br>If you want to start over simply click the Clear button!<br>For more specific help please hover over any of the other help icons!</span>
@@ -341,4 +397,3 @@
 <!--For checkboxes we can do <input type="checkbox"-->
 <!--For large amounts of data entry we can do <textarea></textarea>-->
 <!--pdf.fromHTML(document.body); Investigate this-->
-
