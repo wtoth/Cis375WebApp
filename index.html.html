@@ -85,7 +85,6 @@
 
       if(!checkedBoxes){
         checkedBoxes = "Change will effect (check all that apply):" + '\n' + "Corrective Action __ Preventative Action ___ Defect Repair ___ Updates ___ Other ___" + '\n';
-        console.log("blank error loop works!")
       }
       else{
         checkedBoxes = "Changes will effect: " + checkedBoxes;
@@ -186,9 +185,11 @@
         var processedData= doc.splitTextToSize(data, 7.5);
           
         doc.text(0.5, 0.5, processedData);
-        
-        doc.save('Test.pdf');
 
+        if (!document.getElementById("projectName").value)
+          doc.save('Change_Request')
+        else
+          doc.save(document.getElementById("projectName").value + '_CR')
     });   
     
     // clear all text
@@ -218,7 +219,6 @@
     color: #0c324b;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     font-size: small;
-    background: #000000;
     background: -moz-linear-gradient(top, #FFFFFF 0%, #88bbdd 50%, #FFFFFF 100%);
     background: -webkit-linear-gradient(top, #FFFFFF 0%, #88bbdd 50%, #FFFFFF 100%);
     background: linear-gradient(to bottom, #FFFFFF 0%, #88bbdd 50%, #FFFFFF 100%);
@@ -389,3 +389,4 @@
 <!--For checkboxes we can do <input type="checkbox"-->
 <!--For large amounts of data entry we can do <textarea></textarea>-->
 <!--pdf.fromHTML(document.body); Investigate this-->
+
